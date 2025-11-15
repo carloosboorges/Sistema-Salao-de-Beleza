@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "clientedb")
+@Table(name = "cliente_db")
 public class ClienteModel {
 
     @Id
@@ -17,7 +17,7 @@ public class ClienteModel {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "come", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
     @Column(name = "telefone")
