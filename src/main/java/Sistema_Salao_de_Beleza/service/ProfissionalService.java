@@ -11,16 +11,25 @@ import java.util.List;
 public class ProfissionalService {
 
 
+    private final ProfissionalMapper profissionalMapper;
+    private final ProfissionalRepository profissionalRepository;
+
     public ProfissionalService(ProfissionalMapper profissionalMapper, ProfissionalRepository profissionalRepository) {
         this.profissionalMapper = profissionalMapper;
         this.profissionalRepository = profissionalRepository;
     }
 
-    private final ProfissionalMapper profissionalMapper;
-    private final ProfissionalRepository profissionalRepository;
 
 
-    public ProfissionalDTO adicionarProficionarl(ProfissionalDTO profissionalDTO){
+
+    public ProfissionalDTO adicionarProficional(ProfissionalDTO profissionalDTO){
+        if (profissionalRepository.existsByEmail(profissionalDTO.getEmail())){
+            throw new IllegalArgumentException("Email ja cadastrado");
+
+        }if (profissionalRepository.existsByCpf(profissionalDTO.getCpf())){
+            throw new IllegalArgumentException("CPF ja cadastrado");
+        }
+
         ProfissionalModel novoProfissional = profissionalMapper.toModel(profissionalDTO);
         return profissionalMapper.toDto(profissionalRepository.save(novoProfissional));
     }
