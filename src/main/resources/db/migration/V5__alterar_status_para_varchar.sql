@@ -1,0 +1,2 @@
+ALTER TABLE agendamento_tb
+ALTER COLUMN status VARCHAR(20);
