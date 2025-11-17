@@ -1,4 +1,5 @@
 package Sistema_Salao_de_Beleza.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cliente_db")
+@Table(name = "cliente_tb")
 public class ClienteModel {
 
     @Id
@@ -23,10 +24,11 @@ public class ClienteModel {
     @Column(name = "telefone")
     private String telefone;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<AgendamentoModel> agendamentos;
 
 

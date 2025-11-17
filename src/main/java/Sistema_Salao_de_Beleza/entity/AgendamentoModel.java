@@ -26,9 +26,19 @@ public class AgendamentoModel {
     private LocalTime horario;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private StatusAgendamento status;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private ClienteModel cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "profissional_id")
+    private ProfissionalModel profissional;
+
+    @ManyToOne
+    @JoinColumn(name = "servico_id")
+    private ServicoModel servico;
+
 }

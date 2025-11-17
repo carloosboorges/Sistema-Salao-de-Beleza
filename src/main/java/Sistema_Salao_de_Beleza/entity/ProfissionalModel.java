@@ -24,4 +24,14 @@ public class ProfissionalModel {
 
     @Column(name = "telefone")
     private String telefone;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "cpf", nullable = false, unique = true)
+    private String cpf;
+
+
+
+
 }
