@@ -1,0 +1,2 @@
+ALTER TABLE profissional_tb
+    ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE;
