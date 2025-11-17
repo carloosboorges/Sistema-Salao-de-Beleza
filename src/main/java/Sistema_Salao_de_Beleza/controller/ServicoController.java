@@ -11,7 +11,7 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/servico")
 public class ServicoController {
 

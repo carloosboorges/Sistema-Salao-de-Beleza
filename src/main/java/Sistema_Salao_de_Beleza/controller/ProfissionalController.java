@@ -3,15 +3,12 @@ import Sistema_Salao_de_Beleza.dto.ProfissionalDTO;
 import Sistema_Salao_de_Beleza.service.ProfissionalService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/profissional")
 public class ProfissionalController {
 
@@ -23,8 +20,8 @@ public class ProfissionalController {
 
 
     @PostMapping("/adicionar")
-    public ResponseEntity<ProfissionalDTO> adicionarProfissional(ProfissionalDTO profissionalDTO){
-        ProfissionalDTO profissional = profissionalService.adicionarProficionarl(profissionalDTO);
+    public ResponseEntity<ProfissionalDTO> adicionarProfissional(@RequestBody ProfissionalDTO profissionalDTO){
+        ProfissionalDTO profissional = profissionalService.adicionarProficional(profissionalDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(profissional);
     }
 
@@ -58,7 +55,7 @@ public class ProfissionalController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarProfissional(Long id){
+    public ResponseEntity<String> deletarProfissional(@PathVariable Long id){
         try{
             profissionalService.deletarProfissiona(id);
             return ResponseEntity.ok().body("Profissional com ID " + id + " deleteado com sucesso.");

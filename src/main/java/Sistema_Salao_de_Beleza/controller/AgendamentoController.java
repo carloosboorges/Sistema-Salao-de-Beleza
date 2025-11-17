@@ -1,9 +1,9 @@
 package Sistema_Salao_de_Beleza.controller;
-import Sistema_Salao_de_Beleza.dto.AgendamentoDTO;
+import Sistema_Salao_de_Beleza.dto.AgendamentoRequestDTO;
+import Sistema_Salao_de_Beleza.dto.AgendamentoResponseDTO;
 import Sistema_Salao_de_Beleza.service.AgendamentoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,14 +22,14 @@ public class AgendamentoController {
 
 
     @PostMapping("/adicionar")
-    public ResponseEntity<AgendamentoDTO> adicionarAgendamento(@RequestBody AgendamentoDTO agendamentoDTO){
-        AgendamentoDTO novoAgendamento = agendamentoService.fazerAgendamento(agendamentoDTO);
+    public ResponseEntity<AgendamentoResponseDTO> adicionarAgendamento(@RequestBody AgendamentoRequestDTO agendamentoDTO){
+        AgendamentoResponseDTO novoAgendamento = agendamentoService.fazerAgendamento(agendamentoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoAgendamento);
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<AgendamentoDTO>> listarAll(){
-        List<AgendamentoDTO> lista = agendamentoService.listarAgendamentos();
+    public ResponseEntity<List<AgendamentoResponseDTO>> listarAll(){
+        List<AgendamentoResponseDTO> lista = agendamentoService.listarAgendamentos();
         if (lista.isEmpty()){
             return ResponseEntity.noContent().build();
         }
@@ -39,7 +39,7 @@ public class AgendamentoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id){
         try{
-            AgendamentoDTO agendamentoEncontrado = agendamentoService.listarPorId(id);
+            AgendamentoResponseDTO agendamentoEncontrado = agendamentoService.listarPorId(id);
             return ResponseEntity.ok(agendamentoEncontrado);
         }catch (EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -47,9 +47,9 @@ public class AgendamentoController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarAgendamento(@PathVariable Long id, @RequestBody AgendamentoDTO agendamentoDTO){
+    public ResponseEntity<?> atualizarAgendamento(@PathVariable Long id, @RequestBody AgendamentoRequestDTO agendamentoDTO){
         try{
-            AgendamentoDTO agendamento = agendamentoService.alterarAgendamento(id, agendamentoDTO);
+            AgendamentoResponseDTO agendamento = agendamentoService.alterarAgendamento(id, agendamentoDTO);
             return ResponseEntity.ok(agendamento);
         }catch (EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
