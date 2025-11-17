@@ -3,4 +3,7 @@ import Sistema_Salao_de_Beleza.entity.ProfissionalModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfissionalRepository extends JpaRepository<ProfissionalModel, Long> {
+
+    boolean existsByEmail(String email);
+    boolean existsByCpf(String cpf);
 }
