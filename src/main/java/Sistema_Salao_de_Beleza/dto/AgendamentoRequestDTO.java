@@ -1,5 +1,4 @@
 package Sistema_Salao_de_Beleza.dto;
-
 import Sistema_Salao_de_Beleza.enums.StatusAgendamento;
 import java.time.LocalTime;
 

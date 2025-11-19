@@ -1,17 +1,11 @@
 package Sistema_Salao_de_Beleza.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ClienteDTO {
+public record ClienteDTO (
 
-    private Long id;
-    private String nome;
-    private String telefone;
-    private String email;
+    Long id,
+    String nome,
+    String telefone,
+    String email
 
 
-}
+){}
