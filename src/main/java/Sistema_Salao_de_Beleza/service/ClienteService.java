@@ -21,7 +21,7 @@ public class ClienteService {
     }
 
     public ClienteDTO adicionarCliente(ClienteDTO novoClienteDTO) {
-        if (clienteRepository.existsByEmail(novoClienteDTO.getEmail())) {
+        if (clienteRepository.existsByEmail(novoClienteDTO.email())) {
             throw new IllegalArgumentException("Email já cadastrado.");
         }
 

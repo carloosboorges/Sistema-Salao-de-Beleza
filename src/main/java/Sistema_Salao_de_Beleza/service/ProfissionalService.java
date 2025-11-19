@@ -23,10 +23,10 @@ public class ProfissionalService {
 
 
     public ProfissionalDTO adicionarProficional(ProfissionalDTO profissionalDTO){
-        if (profissionalRepository.existsByEmail(profissionalDTO.getEmail())){
+        if (profissionalRepository.existsByEmail(profissionalDTO.email())){
             throw new IllegalArgumentException("Email ja cadastrado");
 
-        }if (profissionalRepository.existsByCpf(profissionalDTO.getCpf())){
+        }if (profissionalRepository.existsByCpf(profissionalDTO.cpf())){
             throw new IllegalArgumentException("CPF ja cadastrado");
         }
 

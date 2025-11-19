@@ -39,26 +39,23 @@ public class AgendamentoService {
     // =====================================
     //            CRIAR AGENDAMENTO
     // =====================================
-    public AgendamentoResponseDTO fazerAgendamento(AgendamentoRequestDTO dto) {
+    public AgendamentoResponseDTO fazerAgendamento(AgendamentoRequestDTO novoAgendamentoDto) {
 
         AgendamentoModel model = new AgendamentoModel();
 
-        model.setData(dto.data());
-        model.setHorario(dto.horario());
-        model.setStatus(dto.status());
+        model.setData(novoAgendamentoDto.data());
+        model.setHorario(novoAgendamentoDto.horario());
+        model.setStatus(novoAgendamentoDto.status());
 
-        model.setCliente(
-                clienteRepository.findById(dto.clienteId())
+        model.setCliente(clienteRepository.findById(novoAgendamentoDto.clienteId())
                         .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"))
         );
 
-        model.setProfissional(
-                profissionalRepository.findById(dto.profissionalId())
+        model.setProfissional(profissionalRepository.findById(novoAgendamentoDto.profissionalId())
                         .orElseThrow(() -> new EntityNotFoundException("Profissional não encontrado"))
         );
 
-        model.setServico(
-                servicoRepository.findById(dto.servicoId())
+        model.setServico(servicoRepository.findById(novoAgendamentoDto.servicoId())
                         .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado"))
         );
 
@@ -90,32 +87,29 @@ public class AgendamentoService {
     // =====================================
     //         ATUALIZAR AGENDAMENTO
     // =====================================
-    public AgendamentoResponseDTO alterarAgendamento(Long id, AgendamentoRequestDTO dto) {
+    public AgendamentoResponseDTO alterarAgendamento(Long id, AgendamentoRequestDTO novoAgendamentoDto) {
 
-        AgendamentoModel existente = agendamentoRepository.findById(id)
+        AgendamentoModel agendamentoExistente = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Agendamento com ID "
                         + id + " não encontrado."));
 
-        existente.setData(dto.data());
-        existente.setHorario(dto.horario());
-        existente.setStatus(dto.status());
+        agendamentoExistente.setData(novoAgendamentoDto.data());
+        agendamentoExistente.setHorario(novoAgendamentoDto.horario());
+        agendamentoExistente.setStatus(novoAgendamentoDto.status());
 
-        existente.setCliente(
-                clienteRepository.findById(dto.clienteId())
+        agendamentoExistente.setCliente(clienteRepository.findById(novoAgendamentoDto.clienteId())
                         .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"))
         );
 
-        existente.setProfissional(
-                profissionalRepository.findById(dto.profissionalId())
+        agendamentoExistente.setProfissional(profissionalRepository.findById(novoAgendamentoDto.profissionalId())
                         .orElseThrow(() -> new EntityNotFoundException("Profissional não encontrado"))
         );
 
-        existente.setServico(
-                servicoRepository.findById(dto.servicoId())
+        agendamentoExistente.setServico(servicoRepository.findById(novoAgendamentoDto.servicoId())
                         .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado"))
         );
 
-        AgendamentoModel salvo = agendamentoRepository.save(existente);
+        AgendamentoModel salvo = agendamentoRepository.save(agendamentoExistente);
 
         return agendamentoMapper.toResponse(agendamentoRepository.save(salvo));
     }
